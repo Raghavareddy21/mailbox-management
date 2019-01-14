@@ -8,3 +8,10 @@ class OtherUsers(models.Model):
 
     def __str__(self):
         return self.user
+class Package(models.Model):
+    Number=models.IntegerField(blank=False)
+    Company=models.CharField(max_length=50,blank=False)
+    RollNo=models.CharField(max_length=30,blank=False)
+    Phone=models.IntegerField(max_length=12,blank=False)
+    def __str__(self):
+        return self.RollNo 

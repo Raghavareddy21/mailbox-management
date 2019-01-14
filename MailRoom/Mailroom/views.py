@@ -16,7 +16,18 @@ def signup(request):
     else:
         form = forms.Register()
     return render(request, 'Mailroom/signup.html', {'form': form})
-
+def Package_entry(request):
+    if request.user.is_authenticated:
+        form = forms.Package(request.POST)
+        if request.method=='POST':
+            if form.is_valid():
+                form.save()
+                return HttpResponse("Package Entered")
+            else:
+                return render(request, 'Mailroom/entry.html', {'form': form})
+        else:
+            form=forms.Package()
+        return render(request, 'Mailroom/entry.html', {'form': form})
 def login(request):
     a
 def logout_view(request):
