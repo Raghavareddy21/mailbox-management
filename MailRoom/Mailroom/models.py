@@ -13,5 +13,6 @@ class Package(models.Model):
     Company=models.CharField(max_length=50,blank=False)
     RollNo=models.CharField(max_length=30,blank=False)
     Phone=models.IntegerField(max_length=12,blank=False)
+    OTP=models.CharField(max_length=7,blank=True)
     def __str__(self):
-        return self.RollNo 
+        return self.RollNo
