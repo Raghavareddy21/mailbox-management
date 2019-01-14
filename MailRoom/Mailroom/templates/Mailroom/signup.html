@@ -1,0 +1,39 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+      <br /><br /><br />
+      <h4 style="color:red;text-align:center;">
+        {% for field in form %}
+          {% for error in field.errors %}
+        {{ error }}
+        {% endfor %}
+        {% endfor %}
+      </h4>
+    <div class="row">
+      <div class="col-md-6 offset-md-4 card">
+        <div class="card-header" style="background: #ffffff;"><h1>Signup</h1></div>
+        <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+      {% for field in form %}
+          <label class="control-label"> {{ field.label_tag }} </label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          {{ field }}<br>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-md" id="login">signup</button>
+    </div>
+    </form>
+  </div>
+  </div>
+  </div>
+  </div>
+  </body>
+  </html>
