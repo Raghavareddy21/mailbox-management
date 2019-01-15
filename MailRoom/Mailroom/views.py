@@ -72,13 +72,10 @@ def Package_entry(request):
                 form.OTP=generated
                 form.save()
                 User_data = models.OtherUsers.objects.all()
-                print(User_data)
-                DataToCheck = form.cleaned_data.get('RollNo')
+                DataToCheck1, DataToCheck2 = form.cleaned_data.get('RollNo'), form.cleaned_data.get('Phone')
                 for number in User_data:
-                    if DataToCheck == number.rollNo:
-                        print(number.Mail_Id)
+                    if DataToCheck1 == number.rollNo or DataToCheck2 == number.phone:
                         sendMail(number.Mail_Id, generated)
-                        print(number.Mail_Id)
                 return HttpResponse("Package Entered")
             else:
                 return render(request, 'Mailroom/entry.html', {'form': form})
