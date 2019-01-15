@@ -69,10 +69,10 @@ def Package_entry(request):
         if request.method=='POST':
             if form.is_valid():
                 generated = generateOTP()
-                form.OTP=generated
                 form.save()
                 User_data = models.OtherUsers.objects.all()
-                DataToCheck1, DataToCheck2 = form.cleaned_data.get('RollNo'), form.cleaned_data.get('Phone')
+                DataToCheck1 = form.cleaned_data.get('RollNo')
+                DataToCheck2 = form.cleaned_data.get('Phone')
                 for number in User_data:
                     if DataToCheck1 == number.rollNo or DataToCheck2 == number.phone:
                         sendMail(number.Mail_Id, generated)
