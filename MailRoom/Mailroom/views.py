@@ -1,4 +1,5 @@
 import smtplib, ssl
+import math, random
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.http import HttpResponse
@@ -6,7 +7,16 @@ from . import forms
 from . import models
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-def sendMail(receiver_email):
+
+def generateOTP():
+    string = '0123456789'
+    OTP = ""
+    length = len(string)
+    for i in range(6) :
+        OTP += string[math.floor(random.random() * length)]
+    return OTP
+
+def sendMail(receiver_email, OTP):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "subhash.prince001@gmail.com"
@@ -15,7 +25,7 @@ def sendMail(receiver_email):
     Subject: Collect Package
 
     Your package has arrived at the Amrita Mailroom
-    Your OTP to collect the package is ."""
+    Your OTP to collect the package is """ + OTP +'.'
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
@@ -37,6 +47,8 @@ def Package_entry(request):
         form = forms.Package(request.POST)
         if request.method=='POST':
             if form.is_valid():
+                generated = generateOTP()
+                form.OTP=generated
                 form.save()
                 User_data = models.OtherUsers.objects.all()
                 print(User_data)
@@ -44,7 +56,7 @@ def Package_entry(request):
                 for number in User_data:
                     if DataToCheck == number.rollNo:
                         print(number.Mail_Id)
-                        sendMail(number.Mail_Id)
+                        sendMail(number.Mail_Id, generated)
                         print(number.Mail_Id)
                 return HttpResponse("Package Entered")
             else:

@@ -8,4 +8,5 @@ class Register(forms.ModelForm):
 class Package(forms.ModelForm):
     class Meta:
         model=models.Package
+        OTP=forms.CharField(max_length=7,required=False)
         fields=('Number','Company','RollNo','Phone')
