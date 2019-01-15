@@ -72,9 +72,8 @@ def Package_entry(request):
                 form.save()
                 User_data = models.OtherUsers.objects.all()
                 DataToCheck1 = form.cleaned_data.get('RollNo')
-                DataToCheck2 = form.cleaned_data.get('Phone')
                 for number in User_data:
-                    if DataToCheck1 == number.rollNo or DataToCheck2 == number.phone:
+                    if DataToCheck1 == number.rollNo:
                         sendMail(number.Mail_Id, generated)
                 return HttpResponse("Package Entered")
             else:
