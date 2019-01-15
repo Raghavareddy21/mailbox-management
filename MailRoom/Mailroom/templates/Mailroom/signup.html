@@ -1,5 +1,6 @@
-<html>
-<head>
+{% extends 'Mailroom/Nav.html' %}
+
+{% block content %}
 <style>
 form{
 	background-color:rgb(178,190,181,0.8);
@@ -23,14 +24,6 @@ body{
 	background-repeat: no-repeat;
 
 }
-</style>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-<style>
 marquee {
         width: 100%;
         padding: 10px 0;
@@ -67,5 +60,4 @@ marquee {
   </div>
   </div>
   </div>
-  </body>
-  </html>
+{% endblock %}

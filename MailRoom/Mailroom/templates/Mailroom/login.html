@@ -1,11 +1,6 @@
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends 'Mailroom/Nav.html' %}
+
+{% block content %}
 <div class="container">
   <br /><br /><br /><br /><br /><br />
     <h4 style="color:red;text-align:center;">{{err}}</h4>
@@ -33,6 +28,4 @@
     </div>
     </div>
   </div>
-</div>
-</body>
-</html>
+</div>{% endblock %}
