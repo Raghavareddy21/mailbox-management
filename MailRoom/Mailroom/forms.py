@@ -6,7 +6,7 @@ class Register(forms.ModelForm):
 		model=models.OtherUsers
 		fields=('user','phone','rollNo','Mail_Id')
 class Package(forms.ModelForm):
-    OTP=forms.CharField(max_length=7,required=True)
+    OTP=forms.CharField(max_length=7,required=False)
     class Meta:
         model=models.Package
         fields=('Number','Company','RollNo','Phone','OTP')
