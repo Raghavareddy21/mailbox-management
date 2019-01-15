@@ -16,6 +16,26 @@ def generateOTP():
         OTP += string[math.floor(random.random() * length)]
     return OTP
 
+def sendWelcomeMail(receiver_email):
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "subhash.prince001@gmail.com"
+    password = 'subhash17'
+    message = """\
+    Subject: Welcome to Amrita Mailroom Service
+
+    Thank you for registering your contact details with Amrita Mailroom Service.
+    You will receive E-mail updates on any packages that are sent for you. You
+    will receive an OTP with the notification E-mail to verify it's you during the pickup.\
+    
+    Regards,
+    Amrita Mailroom Service."""
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
 def sendMail(receiver_email, OTP):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
@@ -36,6 +56,7 @@ def signup(request):
         form = forms.Register(request.POST)
         if form.is_valid():
             form.save()
+            sendWelcomeMail(form.cleaned_data.get('Mail_Id'))
             return HttpResponse("user saved")
         else:
             return render(request, 'Mailroom/signup.html', {'form': form})
