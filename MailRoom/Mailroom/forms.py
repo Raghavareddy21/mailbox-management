@@ -6,7 +6,13 @@ class Register(forms.ModelForm):
 		model=models.OtherUsers
 		fields=('user','phone','rollNo','Mail_Id')
 class Package(forms.ModelForm):
+    OTP=forms.CharField(max_length=7,required=True)
     class Meta:
         model=models.Package
-        OTP=forms.CharField(max_length=7,required=False)
-        fields=('Number','Company','RollNo','Phone')
+        fields=('Number','Company','RollNo','Phone','OTP')
+class Retrieve(forms.ModelForm):
+    OTP=forms.CharField(max_length=7,label='OTP')
+    RollNo=forms.CharField(max_length=30,label='RollNo')
+    class Meta:
+        model=models.Retrieve
+        fields=('OTP','RollNo')

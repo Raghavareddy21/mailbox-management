@@ -46,10 +46,15 @@ def Package_entry(request):
     if request.user.is_authenticated:
         form = forms.Package(request.POST)
         if request.method=='POST':
+            generated = generateOTP()
+            print(generated)
+            form.instance.OTP=generated
+            print(form)
             if form.is_valid():
-                generated = generateOTP()
-                form.OTP=generated
                 form.save()
+                #num=models.Package.objects.get(RollNo=form.RollNo)
+                #num[0].OTP=generated
+                #print(num.OTP)
                 User_data = models.OtherUsers.objects.all()
                 print(User_data)
                 DataToCheck = form.cleaned_data.get('RollNo')
@@ -68,3 +73,16 @@ def login(request):
     a
 def logout_view(request):
     logout(request)
+def retrieve(request):
+    if request.user.is_authenticated:
+        form = forms.Retrieve(request.POST)
+        if request.method=='POST':
+            if form.is_valid():
+                OTP=form.cleaned_data.get('OTP'),
+                RollNo=form.cleaned_data.get('RollNo')
+                roll=models.Package.objects.all()
+                for number in roll:
+                    if RollNo==number.RollNo:
+                        if OTP== number.OTP:
+                            return redirect('verified.html')
+    return render(request,'Mailroom/delivery.html',{'form':form})

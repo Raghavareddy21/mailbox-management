@@ -1,0 +1,22 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+    {% for field in form %}
+        <label class="control-label"> {{ field.label_tag }} </label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        {{ field }}<br>
+    {% endfor %}
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary btn-md" id="login">Give Away</button>
+  </div>
+  </form>
+  </body>
+  </html>

@@ -16,3 +16,8 @@ class Package(models.Model):
     OTP=models.CharField(max_length=7,blank=True)
     def __str__(self):
         return self.RollNo
+class Retrieve(models.Model):
+    OTP=models.CharField(max_length=7)
+    RollNo=models.CharField(max_length=30)
+    def __str__(self):
+        return self.RollNo

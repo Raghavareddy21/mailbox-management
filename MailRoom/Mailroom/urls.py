@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^login/$', views.login, name="login.html"),
     url(r'^logout/$', views.logout_view, name="logout.html"),
     url(r'^entry/$',views.Package_entry, name="entry.html"),
+    url(r'^delivery/$',views.retrieve,name="delivery.html"),
 ]
