@@ -149,3 +149,9 @@ def retrieve(request):
     return render(request,'Mailroom/delivery.html',{'form':form})
 def verified(request):
     return redirect('/Mailroom/verified/')
+def Home(request):
+	if request.user.is_authenticated:
+		Packages = models.Package.objects.all()
+		return render(request, 'Mailroom/Home.html',{'Packages':Packages})
+	else:
+		return HttpResponse("you need to login to access Packages")
