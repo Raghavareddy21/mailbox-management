@@ -6,8 +6,8 @@ from django.http import HttpResponse
 from . import forms
 from . import models
 from django.contrib.auth.models import User
-from django.contrib.auth import logout
-
+from django.contrib.auth import authenticate,logout
+from django.contrib.auth import login as auth_login
 def generateOTP():
     string = '0123456789'
     OTP = ""
@@ -107,10 +107,25 @@ def Package_entry(request):
         return render(request, 'Mailroom/entry.html', {'form': form})
 
 def login(request):
-    a
+    if request.user.is_authenticated:
+        return HttpResponse("you are already logged in")
+    else:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username,
+             password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect('/Mailroom/Home/')
+            else:
+                return render(request, 'Mailroom/login.html', {'err': 'Wrong credentials provided'})
+        else:
+            return render(request, 'Mailroom/login.html', {'err': ''})
 
 def logout_view(request):
     logout(request)
+    return HttpResponse("You have succesfully logged out :)")
 
 def retrieve(request):
     if request.user.is_authenticated:
@@ -123,7 +138,14 @@ def retrieve(request):
                 for number in roll:
                     if RollNo==number.RollNo:
                         if OTP== number.OTP:
-                            #sendRetreivalconf()
+                            sendRetreivalconf()
                             return redirect('verified.html')
-
+                        else:
+                            return HttpResponse("Wrong OTP")
+                    else:
+                        return HttpResponse("please enter the right Roll Number")
+        else:
+            return render(request,'Mailroom/delivery.html',{'form':form})
     return render(request,'Mailroom/delivery.html',{'form':form})
+def verified(request):
+    return redirect('/Mailroom/verified/')
