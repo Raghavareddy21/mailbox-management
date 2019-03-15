@@ -35,11 +35,6 @@ body{
   <div class="container">
   	<h1><b>Enter Package Details:</b></h1>
   	<div class="row" style="margin:25px;">
-      {% for field in form %}
-        {% for error in field.errors %}
-      {{ error }}
-      {% endfor %}
-      {% endfor %}
   		<form method="post" enctype="multipart/form-data">
   		{% csrf_token %}
 <div class="entry">
@@ -63,6 +58,11 @@ body{
           <input class="form-control" placeholder="" name="Phone" id="Phone">
       </div>
   		<button type="submit">Save Package</button>
+			{% for field in form %}
+        {% for error in field.errors %}
+      {{ error }}
+      {% endfor %}
+      {% endfor %}
   	</form>
   	</div>
 
