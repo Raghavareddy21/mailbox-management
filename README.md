@@ -4,7 +4,7 @@ Our parcel delivery is handled using hand records. So this project automates the
 
 You can start contributing to this project by:
 
-- Clone this repository:  ```git clone https://github.com/amfoss/malibox-management```
+- Clone this repository:  ```git clone https://github.com/Raghavareddy21/malibox-management```
 - Setup the development environment:
   - Go into the project folder ```cd Elites_Project/```
   - You can activate the source by doing ```source project/bin/activate```
